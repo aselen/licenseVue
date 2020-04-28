@@ -1,6 +1,5 @@
 import axios from 'axios'
 import store from '../store'
-//import router from '../router'
 
 const client = axios.create({
   baseURL: 'http://localhost:5000',
@@ -22,6 +21,8 @@ function addSubscriber(callback) {
   subscribers.push(callback)
 }
 
+//request eklemek gerekiyor...
+
 client.interceptors.response.use(
   function(response) {
     return response
@@ -36,18 +37,27 @@ client.interceptors.response.use(
     if (status === 401) {
       if (!isAlreadyFetchingAccessToken) {
         isAlreadyFetchingAccessToken = true
-        store.dispatch('getNewToken').then(res => {
-          isAlreadyFetchingAccessToken = false
-          console.log(res)
+        store
+          .dispatch('getNewToken')
+          .then(res => {
+            isAlreadyFetchingAccessToken = false
+            console.log(res)
 
-          localStorage.setItem('user', JSON.stringify(res.data))
+            localStorage.setItem('user', JSON.stringify(res.data))
 
-          client.defaults.headers.common[
-            'Authorization'
-          ] = `Bearer ${res.data.authToken}`
+            client.defaults.headers.common[
+              'Authorization'
+            ] = `Bearer ${res.data.authToken}`
 
-          onAccessTokenFetched(res.data.authToken)
-        })
+            onAccessTokenFetched(res.data.authToken)
+          })
+          .catch(err => {
+            if (err.response.status !== 400) {
+              store.dispatch('logout')
+            } else {
+              store.dispatch('logoutLocal')
+            }
+          })
       }
 
       const retryOriginalRequest = new Promise(resolve => {
@@ -69,5 +79,12 @@ export default {
   },
   getWeather() {
     return client.get('/WeatherForecast')
+  },
+  logout() {
+    console.log(JSON.parse(localStorage.getItem('user')).authToken)
+    return client.get(
+      '/Logout?expiredToken=' +
+        JSON.parse(localStorage.getItem('user')).authToken
+    )
   }
 }

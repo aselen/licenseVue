@@ -32,12 +32,20 @@ export default new Vuex.Store({
     },
 
     logout({ commit }) {
+      UserService.logout().then(() => {
+        commit('SET_USER', null)
+        localStorage.clear()
+        location.reload()
+      })
+    },
+
+    logoutLocal({ commit }) {
       commit('SET_USER', null)
       localStorage.clear()
+      location.reload()
     },
 
     getWeather({ commit }) {
-      console.log('cagrildi.....')
       return UserService.getWeather().then(res => {
         console.log(res.data)
         commit('SET_WEATHER', res.data)
