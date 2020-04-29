@@ -2,8 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Authenticate from '../views/Authenticate.vue'
 import Dashboard from '../views/Dashboard.vue'
-import Test from '../views/Test.vue'
-import Test2 from '../views/Test2.vue'
+import Weather from '../views/Weather.vue'
+import Profile from '../views/Profile.vue'
 
 Vue.use(VueRouter)
 
@@ -17,17 +17,17 @@ const routes = [
     path: '/',
     name: 'Dashboard',
     component: Dashboard,
-    redirect: '/test',
+    redirect: '/Weather',
     children: [
       {
-        path: 'test',
-        name: 'Test',
-        component: Test
+        path: 'Weather',
+        name: 'Weather',
+        component: Weather
       },
       {
-        path: 'test2',
-        name: 'Test2',
-        component: Test2
+        path: 'profile',
+        name: 'Profile',
+        component: Profile
       }
     ]
   }
@@ -46,6 +46,7 @@ router.beforeEach((to, from, next) => {
   const loggedIn = localStorage.getItem('user')
 
   if (authRequired && !loggedIn) {
+    //kullanici login olup, local storage temizlerse ve sayfa yenilemesi yaparsa login kalmis oluyor..
     return next('/auth')
   }
 

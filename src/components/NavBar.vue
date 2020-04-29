@@ -16,7 +16,7 @@
 
       <v-list-item link>
         <v-list-item-content>
-          <v-list-item-title class="title">
+          <v-list-item-title class="title" color="white">
             {{ user.name + ' ' + user.surname }}
           </v-list-item-title>
           <v-list-item-subtitle>
@@ -52,8 +52,8 @@ export default {
   data() {
     return {
       items: [
-        { title: 'Test', icon: 'mdi-view-dashboard', route: '/test' },
-        { title: 'Test2', icon: 'mdi-view-dashboard', route: '/test2' }
+        { title: 'Weather', icon: 'mdi-view-dashboard', route: '/weather' },
+        { title: 'Profile', icon: 'mdi-view-dashboard', route: '/profile' }
       ]
     }
   },
@@ -65,3 +65,5 @@ export default {
   }
 }
 </script>
+
+<style scoped></style>

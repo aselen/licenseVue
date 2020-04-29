@@ -83,7 +83,7 @@ export default {
           password: this.password
         })
         .then(() => {
-          this.$router.push('/test')
+          this.$router.push('/weather')
         })
         .catch(err => {
           this.loading = false

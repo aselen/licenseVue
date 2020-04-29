@@ -47,23 +47,20 @@ export default new Vuex.Store({
 
     getWeather({ commit }) {
       return UserService.getWeather().then(res => {
-        console.log(res.data)
         commit('SET_WEATHER', res.data)
       })
     },
 
     getNewToken() {
       return new Promise((resolve, reject) => {
-        console.log(UserService.client.defaults.headers.common['Authorization'])
+        //console.log('refresh')
+        //console.log(UserService.client.defaults.headers.common['Authorization'])
 
         UserService.client
-          .get(
-            '/Refresh?' +
-              'expiredToken=' +
-              JSON.parse(localStorage.getItem('user')).authToken +
-              '&&refreshToken=' +
-              JSON.parse(localStorage.getItem('user')).refreshToken
-          )
+          .post('/Refresh', {
+            refreshToken: JSON.parse(localStorage.getItem('user')).refreshToken,
+            authToken: JSON.parse(localStorage.getItem('user')).authToken
+          })
           .then(res => {
             resolve(res)
           })

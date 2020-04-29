@@ -28,6 +28,8 @@ client.interceptors.response.use(
     return response
   },
   function(error) {
+    if (!error.response) console.log('Kullanıcı uyarılmalı')
+
     const {
       config,
       response: { status }
@@ -41,7 +43,6 @@ client.interceptors.response.use(
           .dispatch('getNewToken')
           .then(res => {
             isAlreadyFetchingAccessToken = false
-            console.log(res)
 
             localStorage.setItem('user', JSON.stringify(res.data))
 
@@ -81,10 +82,6 @@ export default {
     return client.get('/WeatherForecast')
   },
   logout() {
-    console.log(JSON.parse(localStorage.getItem('user')).authToken)
-    return client.get(
-      '/Logout?expiredToken=' +
-        JSON.parse(localStorage.getItem('user')).authToken
-    )
+    return client.get('/Logout')
   }
 }
