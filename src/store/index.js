@@ -15,6 +15,10 @@ export default new Vuex.Store({
     },
     SET_WEATHER(state, weather) {
       state.weather = weather
+    },
+    SET_USER_INFO(state, userInfo) {
+      state.user.name = userInfo.name
+      state.user.surname = userInfo.surname
     }
   },
   actions: {
@@ -48,6 +52,18 @@ export default new Vuex.Store({
     getWeather({ commit }) {
       return UserService.getWeather().then(res => {
         commit('SET_WEATHER', res.data)
+      })
+    },
+
+    getUserInfo({ commit }) {
+      return UserService.getUserInfo().then(res => {
+        commit('SET_USER_INFO', res.data)
+      })
+    },
+
+    updateUserInfo({ commit }, { data }) {
+      return UserService.updateUserInfo(data).then(res => {
+        commit('SET_USER_INFO', res.data)
       })
     },
 

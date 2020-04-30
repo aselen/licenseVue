@@ -83,5 +83,11 @@ export default {
   },
   logout() {
     return client.get('/Logout')
+  },
+  getUserInfo() {
+    return client.get('/User')
+  },
+  updateUserInfo(data) {
+    return client.patch('/User', data)
   }
 }
