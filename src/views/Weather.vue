@@ -1,6 +1,6 @@
 <template>
-  <v-container>
-    <v-btn class="my-5" @click="updateWeather" color="warning">
+  <div class="page">
+    <v-btn class="px-30" @click="updateWeather" color="warning">
       Update Weather
     </v-btn>
 
@@ -21,7 +21,7 @@
         </template>
       </v-data-table>
     </v-hover>
-  </v-container>
+  </div>
 </template>
 
 <script>

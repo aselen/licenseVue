@@ -1,8 +1,15 @@
 <template>
-  <v-container>
-    <NavBar />
-    <router-view />
-  </v-container>
+  <v-row>
+    <v-col cols="1">
+      <NavBar />
+    </v-col>
+
+    <v-col cols="11">
+      <transition name="fade">
+        <router-view />
+      </transition>
+    </v-col>
+  </v-row>
 </template>
 
 <script>

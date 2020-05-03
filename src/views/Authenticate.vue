@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-layout justify-center>
-      <v-img max-height="50" max-width="250" src="../assets/logo.png" />
+      <v-img max-height="50" max-width="250" src="../assets/aselsan.png" />
     </v-layout>
 
     <v-hover v-slot:default="{ hover }" open-delay="200">
@@ -54,13 +54,7 @@
     </v-layout>
 
     <v-layout justify-center>
-      <svg
-        width="256"
-        height="256"
-        viewBox="0 0 512 512"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
+      <svg width="256" height="256" viewBox="0 0 512 512" fill="none">
         <g id="toll-car">
           <g clip-path="url(#clip0)">
             <g id="car">
